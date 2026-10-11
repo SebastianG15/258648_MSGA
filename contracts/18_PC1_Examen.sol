@@ -8,6 +8,7 @@ contract Zapatillas258648 {
         string modelo;
         string marca;
         uint256 talla;
+        bool estado;
     }
 
     Zapatilla[] public zapatillas;
@@ -24,10 +25,11 @@ contract Zapatillas258648 {
         uint256 _id,
         string memory _modelo,
         string memory _marca,
-        uint256 _talla
+        uint256 _talla,
+        bool _estado
     ) public {
         require(_id % 2 == 0, "El id debe ser par");
-        zapatillas.push(Zapatilla(_id, _modelo, _marca, _talla));
+        zapatillas.push(Zapatilla(_id, _modelo, _marca, _talla, _estado));
         }
     
     function contarElementos() public view returns (uint256) {
@@ -36,6 +38,16 @@ contract Zapatillas258648 {
     
     function cambiarDireccion(address _direccion) public {
         direccion = _direccion;
+    }
+
+    function inactivarElemento(uint256 _id) external {
+        for (uint256 i = 0; i < zapatillas.length; i++) {
+            Zapatilla storage zapatilla = zapatillas[i];
+
+            if (zapatilla.id == _id) {
+                zapatilla.estado = false;
+            }
+        }
     }
 
 }
