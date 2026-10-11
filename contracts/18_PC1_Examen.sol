@@ -20,4 +20,22 @@ contract Zapatillas258648 {
         direccion = msg.sender;
     }
 
+    function agregarElemento(
+        uint256 _id,
+        string memory _modelo,
+        string memory _marca,
+        uint256 _talla
+    ) public {
+        require(_id % 2 == 0, "El id debe ser par");
+        zapatillas.push(Zapatilla(_id, _modelo, _marca, _talla));
+        }
+    
+    function contarElementos() public view returns (uint256) {
+        return zapatillas.length;
+    }
+    
+    function cambiarDireccion(address _direccion) public {
+        direccion = _direccion;
+    }
+
 }
